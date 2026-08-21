@@ -23,6 +23,12 @@ export JAVA_HOME="C:/Program Files/Android/Android Studio/jbr"
 ./gradlew :automotive:assembleDebug
 ```
 
+Birim testleri (hesapların doğruluğu):
+
+```bash
+./gradlew :automotive:testDebugUnitTest
+```
+
 Yayın paketi:
 
 ```bash
@@ -58,14 +64,58 @@ etmediği için emülatörde ekranlar broadcast ile açılır:
 adb shell am broadcast --user 10 -p com.oguzhanyucel.ex30journey -a com.oguzhanyucel.ex30journey.DEBUG --es cmd screen --es to calib
 ```
 
-`to` değerleri: `calib`, `trips`, `records`, `live`. Kanca yalnızca debug
-derlemesinde kurulur.
+Komutlar:
+
+| Komut | Ne yapar |
+|---|---|
+| `--es cmd screen --es to calib\|trips\|records\|live` | ekran açar |
+| `--es cmd demo` | canlı ekranı sentetik değerlerle doldurur (mağaza görselleri) |
+| `--es cmd live` | demo katmanını kaldırır |
+| `--es cmd state --es to AKTIF\|BEKLEME\|HAZIR\|KAPANIYOR` | yolculuk durum makinesini elle sürer |
+| `--es cmd seed --ei trips 12` | sahte geçmiş üretir — **kayıtlı yolculukları siler** |
+| `--es cmd sprint --ef target 5.3` | sentetik sürüş: kalkış → 130 km/h → duruş; dört A4 ölçümünü birden üretir |
+| `--es cmd export` | kayıt dosyalarını İndirilenler'e kopyalar (Ölçüm ekranındaki düğmenin eşi) |
+
+Kanca yalnızca debug derlemesinde kurulur.
+
+**`cmd state` çağrıldığı anda `simulating` açılır** ve gerçek araç verisi artık
+durum geçişi üretmez (§6.11). Emülatörde bu şart: orada vites P, park freni
+çekili ve hız sabit 0 geliyor, yani her yolculuk açılır açılmaz kapanırdı.
+
+Sahte rota beslemek için (1,1 sn aralık, §6.7):
+
+```bash
+powershell -File tools/geo-feed.ps1 -Steps 145
+```
+
+Kaydedilen yolculukları okumak:
+
+```bash
+adb shell run-as com.oguzhanyucel.ex30journey --user 10 cat files/trips.json
+```
 
 Kalibrasyon kaydını okumak:
 
 ```bash
 adb shell run-as com.oguzhanyucel.ex30journey --user 10 tail -20 files/calib.csv
 ```
+
+## Araçtan dosya almak
+
+Araçta `adb` yok ve `filesDir` uygulamaya özel — başka hiçbir uygulama okuyamaz.
+Ölçüm ekranındaki **"Dışa aktar"** düğmesi üç dosyayı da paylaşılan depolamaya
+kopyalıyor:
+
+```
+İndirilenler/EX30YolAnalizi/calib-YYYYAAGG-SSDD.csv
+İndirilenler/EX30YolAnalizi/trips-YYYYAAGG-SSDD.json
+İndirilenler/EX30YolAnalizi/records-YYYYAAGG-SSDD.json
+```
+
+`MediaStore.Downloads` kullanılıyor: API 29+ için izin gerektirmiyor ve
+`Android/data` klasörünün aksine her dosya yöneticisi tarafından görülüyor.
+Kopya sonrası dosya geri okunup boyutu kaynakla karşılaştırılıyor — "istisna
+atmadı" ile "dosya gerçekten yazıldı" aynı şey değil.
 
 Uygulama çalışırken APK değiştirmek host'u çökertir; temiz yol için önce
 `am force-stop`, kurulumdan sonra template host'unu da yeniden başlat.

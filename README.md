@@ -112,10 +112,19 @@ kopyalıyor:
 İndirilenler/EX30YolAnalizi/records-YYYYAAGG-SSDD.json
 ```
 
-`MediaStore.Downloads` kullanılıyor: API 29+ için izin gerektirmiyor ve
-`Android/data` klasörünün aksine her dosya yöneticisi tarafından görülüyor.
-Kopya sonrası dosya geri okunup boyutu kaynakla karşılaştırılıyor — "istisna
-atmadı" ile "dosya gerçekten yazıldı" aynı şey değil.
+`MediaStore.Downloads` kullanılıyor: API 29+ için izin gerektirmiyor. Kopya
+sonrası dosya geri okunup boyutu kaynakla karşılaştırılıyor — "istisna atmadı"
+ile "dosya gerçekten yazıldı" aynı şey değil.
+
+**Önemli:** kapsamlı depolama yüzünden bu dosyalar **başka bir dosya yöneticisi
+uygulamasına görünmez** — Android onları bizim uygulamamıza ait sayıyor. Bu
+yüzden dışa aktarımdan sonra uygulama sistemin İndirilenler ekranını açıyor
+(`DownloadManager.ACTION_VIEW_DOWNLOADS` → `com.android.car.documentsui`);
+sistem uygulaması olduğu için dosyaları görebiliyor. Ayrıntı ve ölçümler:
+`prompt.md` §11.4.
+
+Doğrudan `File` API'siyle yazmayı denemeyin: MediaStore'a kaydolmadığı için
+dosya sistem ekranında da görünmez (ölçüldü).
 
 Uygulama çalışırken APK değiştirmek host'u çökertir; temiz yol için önce
 `am force-stop`, kurulumdan sonra template host'unu da yeniden başlat.

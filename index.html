@@ -26,13 +26,16 @@
 <body>
 
 <h1>EX30 Yol Analizi — Gizlilik Politikası</h1>
-<p class="sub">Uygulama paketi: <code>com.oguzhanyucel.ex30journey</code> · Son güncelleme: 30 Temmuz 2026</p>
+<p class="sub">Uygulama paketi: <code>com.oguzhanyucel.ex30journey</code> · Son güncelleme: 6 Eylül 2026</p>
 
 <div class="box">
-<p><strong>Özet:</strong> Bu uygulamanın internet erişim izni yoktur. Topladığı hiçbir veri
-cihazınızın dışına çıkmaz. Sunucu, hesap, bulut yedeği, reklam ve analitik yoktur.
-Veriler yalnızca aracın kendi hafızasında, uygulamanın özel alanında saklanır ve
+<p><strong>Özet:</strong> Bu uygulamanın sunucusu yoktur. Yolculuk, konum ve araç
+verilerinizin hiçbiri cihazınızın dışına çıkmaz. Hesap, bulut yedeği, reklam ve analitik
+yoktur. Veriler yalnızca aracın kendi hafızasında, uygulamanın özel alanında saklanır ve
 uygulamayı kaldırdığınızda silinir.</p>
+<p>Uygulama <code>INTERNET</code> iznine sahiptir. Bu izin, Pro sürüm satın almasını
+doğrulayan <strong>Google Play Faturalandırma</strong> kütüphanesinin gereğidir ve
+yalnızca onun tarafından kullanılır. Ölçtüğümüz hiçbir veri bu kanaldan geçmez.</p>
 </div>
 
 <h2>1. Hangi veriler işleniyor</h2>
@@ -117,10 +120,24 @@ verilerinizi bir dosya yöneticisiyle araçtan kendiniz alabilmeniz içindir.</p
 </ul>
 
 <h2>3. Veriler nereye gönderiliyor</h2>
-<p><strong>Hiçbir yere.</strong> Uygulama <code>INTERNET</code> iznine sahip değildir;
-teknik olarak ağ bağlantısı kuramaz. Sunucumuz yoktur. Veriler üçüncü taraflarla
-paylaşılmaz, satılmaz, reklam veya analitik amacıyla kullanılmaz. Uygulamada reklam
-ve üçüncü parti izleme aracı bulunmaz.</p>
+<p><strong>Hiçbir yere.</strong> Sunucumuz yoktur. Ölçülen yolculuk, konum ve araç
+verileri üçüncü taraflarla paylaşılmaz, satılmaz, reklam veya analitik amacıyla
+kullanılmaz. Uygulamada reklam ve üçüncü parti izleme aracı bulunmaz.</p>
+
+<h3>İnternet izni neden var</h3>
+<p>Uygulama <code>INTERNET</code> ve <code>ACCESS_NETWORK_STATE</code> izinlerini taşır.
+Bu izinleri biz eklemedik; uygulamaya <strong>Google Play Faturalandırma</strong>
+kütüphanesi ekliyor ve yalnızca o kullanıyor. İşlevi tek bir şeydir: Pro sürümü satın
+alıp almadığınızı Google Play'e sormak.</p>
+<ul>
+  <li>Bu kanaldan <strong>yalnızca satın alma durumu</strong> geçer; yolculuklarınız,
+      konumunuz ve araç verileriniz geçmez.</li>
+  <li>Satın alma işlemini baştan sona Google Play yürütür. Kart bilgileriniz uygulamaya
+      hiçbir zaman ulaşmaz, biz görmeyiz ve saklamayız.</li>
+  <li>Satın aldığınız bilgisi cihazda, uygulamanın özel alanında saklanır; böylece araç
+      çevrimdışıyken de uygulama açık kalır.</li>
+  <li>Bize ait bir sunucu, analitik, reklam ya da çökme raporlama servisi yoktur.</li>
+</ul>
 
 <h2>4. Verilerinizi silme</h2>
 <p>Uygulamayı araçtan kaldırdığınızda tüm kayıtlar silinir. Ayrıca aracın ayarlarından
@@ -136,13 +153,16 @@ Sorularınız için: <a href="mailto:oguzhanyucel44@gmail.com">oguzhanyucel44@gm
 <hr>
 
 <h1 id="en">EX30 Yol Analizi — Privacy Policy</h1>
-<p class="sub">Package: <code>com.oguzhanyucel.ex30journey</code> · Last updated: 30 July 2026</p>
+<p class="sub">Package: <code>com.oguzhanyucel.ex30journey</code> · Last updated: 6 September 2026</p>
 
 <div class="box">
-<p><strong>Summary:</strong> This app has no internet permission. No data it collects ever
-leaves your device. There are no servers, accounts, cloud backups, ads or analytics.
-Data is stored only in the app's private storage in the car and is deleted when you
-uninstall the app.</p>
+<p><strong>Summary:</strong> This app has no server of its own. None of your trip,
+location or vehicle data ever leaves your device. There are no accounts, cloud backups,
+ads or analytics. Data is stored only in the app's private storage in the car and is
+deleted when you uninstall the app.</p>
+<p>The app does hold the <code>INTERNET</code> permission. It is required by the
+<strong>Google Play Billing</strong> library, which verifies the Pro purchase, and is used
+by nothing else. None of the data we measure travels over it.</p>
 </div>
 
 <h2>1. What data is processed</h2>
@@ -228,10 +248,24 @@ can retrieve your own data with a file manager.</p>
 </ul>
 
 <h2>3. Where data is sent</h2>
-<p><strong>Nowhere.</strong> The app does not hold the <code>INTERNET</code> permission and
-is technically unable to open a network connection. We operate no servers. Data is not
-shared with third parties, not sold, and not used for advertising or analytics. The app
-contains no ads and no third-party tracking libraries.</p>
+<p><strong>Nowhere.</strong> We operate no servers. The trip, location and vehicle data
+the app measures is not shared with third parties, not sold, and not used for advertising
+or analytics. The app contains no ads and no third-party tracking libraries.</p>
+
+<h3>Why the internet permission exists</h3>
+<p>The app holds the <code>INTERNET</code> and <code>ACCESS_NETWORK_STATE</code>
+permissions. We did not add them; they are contributed by the <strong>Google Play
+Billing</strong> library and used only by it. Their single purpose is to ask Google Play
+whether you have bought the Pro version.</p>
+<ul>
+  <li>Only the <strong>purchase state</strong> travels over that channel. Your trips,
+      your location and your vehicle data do not.</li>
+  <li>The purchase itself is handled end to end by Google Play. Your payment details never
+      reach the app; we never see or store them.</li>
+  <li>The fact that you purchased is cached in the app's private storage on the device, so
+      the app keeps working while the car is offline.</li>
+  <li>We run no server, analytics, advertising or crash-reporting service.</li>
+</ul>
 
 <h2>4. Deleting your data</h2>
 <p>Uninstalling the app from the vehicle deletes all records. You can also clear the app's
